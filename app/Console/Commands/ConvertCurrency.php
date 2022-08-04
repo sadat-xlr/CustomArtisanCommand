@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
+use AmrShawky\LaravelCurrency\Facade\Currency;
 
 class ConvertCurrency extends Command
 {
@@ -11,7 +13,8 @@ class ConvertCurrency extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'currency:convert {usd}';
+    
 
     /**
      * The console command description.
@@ -27,6 +30,12 @@ class ConvertCurrency extends Command
      */
     public function handle()
     {
-        return 0;
+        $usd=(float)$this->argument('usd');
+        echo Currency::convert()
+        ->from('USD')
+        ->to('BDT')
+        ->amount($usd)
+        ->get();
+        
     }
 }
